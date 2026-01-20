@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Utils Hub - Free Online Tools</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">⚡ Daily Utils Hub</h1>
+                <div class="header-actions">
+                    <input type="text" id="searchBar" class="search-bar" placeholder="Search tools...">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-container">
+            <!-- Sidebar Navigation (Desktop) -->
+            <nav class="sidebar">
+                <ul class="tool-list" id="toolList">
+                    <li><button class="tool-btn active" data-tool="password-generator">🔐 Password Generator</button>
+                    </li>
+                    <li><button class="tool-btn" data-tool="qr-generator">📱 QR Code Generator</button></li>
+                    <li><button class="tool-btn" data-tool="color-palette">🎨 Color Palette</button></li>
+                    <li><button class="tool-btn" data-tool="meme-generator">😂 Meme Generator</button></li>
+                    <li><button class="tool-btn" data-tool="fake-data">👤 Fake Data Generator</button></li>
+                    <li><button class="tool-btn" data-tool="text-case">📝 Text Case Converter</button></li>
+                    <li><button class="tool-btn" data-tool="base64">🔄 Base64 Encoder</button></li>
+                    <li><button class="tool-btn" data-tool="json-formatter">{ } JSON Formatter</button></li>
+                    <li><button class="tool-btn" data-tool="todo-list">✅ Todo List</button></li>
+                    <li><button class="tool-btn" data-tool="note-taker">📋 Note Taker</button></li>
+                </ul>
+            </nav>
+
+            <!-- Main Content Area -->
+            <main class="content">
+                <!-- Tool 1: Password Generator -->
+                <section id="password-generator" class="tool-section active">
+                    <h2>🔐 Password Generator</h2>
+                    <div class="tool-content">
+                        <div class="password-display">
+                            <input type="text" id="passwordOutput" readonly value="Click Generate">
+                            <button id="copyPassword" class="btn-secondary">Copy</button>
+                        </div>
+
+                        <div class="control-group">
+                            <label>Length: <span id="lengthValue">16</span></label>
+                            <input type="range" id="passwordLength" min="8" max="64" value="16">
+                        </div>
+
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" id="includeUppercase" checked> Uppercase (A-Z)</label>
+                            <label><input type="checkbox" id="includeLowercase" checked> Lowercase (a-z)</label>
+                            <label><input type="checkbox" id="includeNumbers" checked> Numbers (0-9)</label>
+                            <label><input type="checkbox" id="includeSymbols" checked> Symbols (!@#$%)</label>
+                        </div>
+
+                        <div class="strength-meter">
+                            <div class="strength-bar" id="strengthBar"></div>
+                        </div>
+                        <p class="strength-text" id="strengthText">Strength: Strong</p>
+
+                        <button id="generatePassword" class="btn-primary">Generate Password</button>
+                    </div>
+                </section>
+
+                <!-- Tool 2: QR Code Generator -->
+                <section id="qr-generator" class="tool-section">
+                    <h2>📱 QR Code Generator</h2>
+                    <div class="tool-content">
+                        <div class="input-group">
+                            <label for="qrInput">Enter text or URL:</label>
+                            <textarea id="qrInput" rows="3" placeholder="https://example.com"></textarea>
+                        </div>
+
+                        <button id="generateQR" class="btn-primary">Generate QR Code</button>
+
+                        <div class="qr-preview">
+                            <canvas id="qrCanvas" width="256" height="256"></canvas>
+                        </div>
+
+                        <button id="downloadQR" class="btn-secondary">Download PNG</button>
+                    </div>
+                </section>
+
+                <!-- Tool 3: Color Palette Generator -->
+                <section id="color-palette" class="tool-section">
+                    <h2>🎨 Color Palette Generator</h2>
+                    <div class="tool-content">
+                        <div class="input-group">
+                            <label for="baseColor">Base Color:</label>
+                            <input type="color" id="baseColor" value="#1a73e8">
+                            <input type="text" id="baseColorHex" value="#1a73e8" placeholder="#1a73e8">
+                        </div>
+
+                        <button id="generatePalette" class="btn-primary">Generate Palette</button>
+
+                        <div id="paletteSwatches" class="palette-swatches">
+                            <!-- Swatches will be generated here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tool 4: Meme Text Generator -->
+                <section id="meme-generator" class="tool-section">
+                    <h2>😂 Meme Text Generator</h2>
+                    <div class="tool-content">
+                        <div class="meme-controls">
+                            <div class="input-group">
+                                <label for="topText">Top Text:</label>
+                                <input type="text" id="topText" placeholder="TOP TEXT">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="bottomText">Bottom Text:</label>
+                                <input type="text" id="bottomText" placeholder="BOTTOM TEXT">
+                            </div>
+
+                            <div class="control-row">
+                                <div class="control-group">
+                                    <label for="fontSize">Font Size:</label>
+                                    <input type="range" id="fontSize" min="20" max="80" value="40">
+                                    <span id="fontSizeValue">40</span>
+                                </div>
+
+                                <div class="control-group">
+                                    <label for="textColor">Text Color:</label>
+                                    <input type="color" id="textColor" value="#ffffff">
+                                </div>
+                            </div>
+                        </div>
+
+                        <canvas id="memeCanvas" width="600" height="400"></canvas>
+
+                        <button id="exportMeme" class="btn-primary">Export Image</button>
+                    </div>
+                </section>
+
+                <!-- Tool 5: Fake Data Generator -->
+                <section id="fake-data" class="tool-section">
+                    <h2>👤 Fake Data Generator</h2>
+                    <div class="tool-content">
+                        <div class="data-buttons">
+                            <button id="genName" class="btn-secondary">Generate Name</button>
+                            <button id="genEmail" class="btn-secondary">Generate Email</button>
+                            <button id="genPhone" class="btn-secondary">Generate Phone</button>
+                            <button id="genAddress" class="btn-secondary">Generate Address</button>
+                            <button id="genIBAN" class="btn-secondary">Generate IBAN</button>
+                        </div>
+
+                        <div class="fake-data-output" id="fakeDataOutput">
+                            <p><strong>Name:</strong> <span id="fakeName">-</span></p>
+                            <p><strong>Email:</strong> <span id="fakeEmail">-</span></p>
+                            <p><strong>Phone:</strong> <span id="fakePhone">-</span></p>
+                            <p><strong>Address:</strong> <span id="fakeAddress">-</span></p>
+                            <p><strong>IBAN:</strong> <span id="fakeIBAN">-</span></p>
+                        </div>
+
+                        <button id="copyAllData" class="btn-primary">Copy All Data</button>
+                    </div>
+                </section>
+
+                <!-- Tool 6: Text Case Converter -->
+                <section id="text-case" class="tool-section">
+                    <h2>📝 Text Case Converter</h2>
+                    <div class="tool-content">
+                        <div class="input-group">
+                            <label for="textInput">Input Text:</label>
+                            <textarea id="textInput" rows="6" placeholder="Enter your text here..."></textarea>
+                        </div>
+
+                        <div class="case-buttons">
+                            <button id="upperCase" class="btn-secondary">UPPERCASE</button>
+                            <button id="lowerCase" class="btn-secondary">lowercase</button>
+                            <button id="sentenceCase" class="btn-secondary">Sentence case</button>
+                            <button id="titleCase" class="btn-secondary">Title Case</button>
+                            <button id="snakeCase" class="btn-secondary">snake_case</button>
+                            <button id="kebabCase" class="btn-secondary">kebab-case</button>
+                            <button id="camelCase" class="btn-secondary">camelCase</button>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="textOutput">Output:</label>
+                            <textarea id="textOutput" rows="6" readonly></textarea>
+                        </div>
+
+                        <button id="copyText" class="btn-primary">Copy Output</button>
+                    </div>
+                </section>
+
+                <!-- Tool 7: Base64 Encoder/Decoder -->
+                <section id="base64" class="tool-section">
+                    <h2>🔄 Base64 Encoder/Decoder</h2>
+                    <div class="tool-content">
+                        <div class="base64-container">
+                            <div class="base64-panel">
+                                <label for="base64Input">Input:</label>
+                                <textarea id="base64Input" rows="8" placeholder="Enter text to encode..."></textarea>
+                                <input type="file" id="fileInput" accept="*/*">
+                            </div>
+
+                            <div class="base64-buttons">
+                                <button id="encodeBase64" class="btn-primary">Encode →</button>
+                                <button id="decodeBase64" class="btn-primary">← Decode</button>
+                            </div>
+
+                            <div class="base64-panel">
+                                <label for="base64Output">Output:</label>
+                                <textarea id="base64Output" rows="8"
+                                    placeholder="Result will appear here..."></textarea>
+                                <div id="imagePreview" class="image-preview"></div>
+                            </div>
+                        </div>
+
+                        <button id="copyBase64" class="btn-secondary">Copy Output</button>
+                    </div>
+                </section>
+
+                <!-- Tool 8: JSON Formatter -->
+                <section id="json-formatter" class="tool-section">
+                    <h2>{ } JSON Formatter</h2>
+                    <div class="tool-content">
+                        <div class="input-group">
+                            <label for="jsonInput">JSON Input:</label>
+                            <textarea id="jsonInput" rows="10" placeholder='{"key": "value"}'></textarea>
+                        </div>
+
+                        <div class="json-buttons">
+                            <button id="beautifyJSON" class="btn-primary">Beautify</button>
+                            <button id="minifyJSON" class="btn-primary">Minify</button>
+                            <button id="validateJSON" class="btn-secondary">Validate</button>
+                        </div>
+
+                        <div id="jsonError" class="error-message"></div>
+
+                        <div class="input-group">
+                            <label for="jsonOutput">Output:</label>
+                            <textarea id="jsonOutput" rows="10" readonly></textarea>
+                        </div>
+
+                        <button id="copyJSON" class="btn-secondary">Copy Output</button>
+                    </div>
+                </section>
+
+                <!-- Tool 9: Todo List Manager -->
+                <section id="todo-list" class="tool-section">
+                    <h2>✅ Todo List Manager</h2>
+                    <div class="tool-content">
+                        <div class="todo-input">
+                            <input type="text" id="todoInput" placeholder="Add a new task...">
+                            <button id="addTodo" class="btn-primary">Add</button>
+                        </div>
+
+                        <div class="todo-filters">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="active">Active</button>
+                            <button class="filter-btn" data-filter="completed">Completed</button>
+                        </div>
+
+                        <ul id="todoList" class="todo-list">
+                            <!-- Todos will be rendered here -->
+                        </ul>
+
+                        <button id="clearCompleted" class="btn-secondary">Clear Completed</button>
+                    </div>
+                </section>
+
+                <!-- Tool 10: Note Taker Pad -->
+                <section id="note-taker" class="tool-section">
+                    <h2>📋 Note Taker Pad</h2>
+                    <div class="tool-content">
+                        <div class="note-container">
+                            <div class="note-panel">
+                                <label for="markdownInput">Markdown Input:</label>
+                                <textarea id="markdownInput" rows="15"
+                                    placeholder="# Heading&#10;**Bold** *Italic*&#10;- List item"></textarea>
+                            </div>
+
+                            <div class="note-panel">
+                                <label>Live Preview:</label>
+                                <div id="markdownPreview" class="markdown-preview"></div>
+                            </div>
+                        </div>
+
+                        <div class="note-actions">
+                            <button id="saveNote" class="btn-primary">Save Note</button>
+                            <button id="loadNote" class="btn-secondary">Load Note</button>
+                            <button id="exportNote" class="btn-secondary">Export TXT</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Bottom Navigation (Mobile) -->
+        <nav class="bottom-nav">
+            <button class="bottom-nav-btn active" data-tool="password-generator">🔐</button>
+            <button class="bottom-nav-btn" data-tool="qr-generator">📱</button>
+            <button class="bottom-nav-btn" data-tool="color-palette">🎨</button>
+            <button class="bottom-nav-btn" data-tool="meme-generator">😂</button>
+            <button class="bottom-nav-btn" data-tool="fake-data">👤</button>
+            <button class="bottom-nav-btn" data-tool="text-case">📝</button>
+            <button class="bottom-nav-btn" data-tool="base64">🔄</button>
+            <button class="bottom-nav-btn" data-tool="json-formatter">{ }</button>
+            <button class="bottom-nav-btn" data-tool="todo-list">✅</button>
+            <button class="bottom-nav-btn" data-tool="note-taker">📋</button>
+        </nav>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with ❤️ on Replit</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
